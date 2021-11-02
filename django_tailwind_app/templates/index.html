@@ -1,0 +1,27 @@
+{% load webpack_loader static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Index</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% stylesheet_pack 'app' %}
+</head>
+<body>
+
+{% include 'components/navbar.html' %}
+
+<div class="jumbotron py-5">
+  <div class="w-full max-w-7xl mx-auto px-4">
+      <h1 class="text-6xl mb-8">Tailwind CSS, Alphine.js, HTMX examples</h1>
+
+    {% include 'components/counter.html' %}
+
+  </div>
+</div>
+
+{% javascript_pack 'app' %}
+
+</body>
+</html>

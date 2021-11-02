@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="w-full max-w-7xl mx-auto px-4">
+
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl mb-6">Task List</h1>
+
+    <a href="{% url "task-create" %}" class="btn-blue my-3">Create Task</a>
+
+    <!-- Alphine.js ModalForm example -->
+    <div x-data="ModalForm" x-cloak x-ref="modelForm" data-url="{% url "modal-task-create" %}">
+      <button class="btn-blue my-3"
+              @click="loadForm">Create Task in Modal with Alphine.js
+      </button>
+      <div class="absolute top-0 left-0 flex justify-center w-full h-full bg-black bg-opacity-30" x-show="open">
+        <div class="relative h-auto w-full max-w-3xl mx-auto mt-10">
+          <div class="p-6 mx-2 bg-white rounded shadow-xl" @click.away="setOpen(false)">
+            <button @click="setOpen(false)"
+                    class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+              ✗
+            </button>
+            <div class="mt-3">
+              <div x-html="formHtml"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Alphine.js + HTMX ModalForm example -->
+    <div x-data="ModalFormHTMX"
+         x-cloak
+         x-ref="modelForm"
+         data-url="{% url "modal-task-create-htmx" %}"
+         @htmx-modal-response="handleModalResponse"
+    >
+      <button
+          class="btn-blue my-3"
+          @click="loadForm()"
+      >Create Task in Modal with Alphine.js + HTMX
+      </button>
+      <div class="absolute top-0 left-0 flex justify-center w-full h-full bg-black bg-opacity-30" x-show="open">
+        <div class="relative h-auto w-full max-w-3xl mx-auto mt-10">
+          <div class="p-6 mx-2 bg-white rounded shadow-xl" @click.away="setOpen(false)">
+            <button @click="setOpen(false)"
+                    class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+              ✗
+            </button>
+            <div class="mt-3 htmx-modal-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task List-->
+    <div class="md:w-2/3 bg-white rounded-lg border">
+      <ul class="divide-y-2 divide-gray-100">
+        {% for obj in object_list %}
+          <li class="p-3 flex items-center" x-data="Task" x-show="!deleted" x-cloak x-transition:leave.duration.300ms>
+            <button class="btn-red mr-3"
+                    data-delete-url="{% url "task-delete" obj.pk %}"
+                    @click="deleteTask"
+                    :disabled="processing"
+                    x-ref="button"
+            >
+              <svg x-show="processing" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                   viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span x-text="getBtnText"></span>
+            </button>
+            {{ obj.due_date }}: {{ obj.title }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+
+{% endblock %}

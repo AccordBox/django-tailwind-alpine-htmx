@@ -8,10 +8,10 @@
 
     <a href="{% url "task-create" %}" class="btn-blue my-3">Create Task</a>
 
-    <!-- Alphine.js ModalForm example -->
+    <!-- Alpine.js ModalForm example -->
     <div x-data="ModalForm" x-cloak x-ref="modelForm" data-url="{% url "modal-task-create" %}">
       <button class="btn-blue my-3"
-              @click="loadForm">Create Task in Modal with Alphine.js
+              @click="loadForm">Create Task in Modal with Alpine.js
       </button>
       <div class="absolute top-0 left-0 flex justify-center w-full h-full bg-black bg-opacity-30" x-show="open">
         <div class="relative h-auto w-full max-w-3xl mx-auto mt-10">
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <!-- Alphine.js + HTMX ModalForm example -->
+    <!-- Alpine.js + HTMX ModalForm example -->
     <div x-data="ModalFormHTMX"
          x-cloak
          x-ref="modelForm"
@@ -39,7 +39,7 @@
       <button
           class="btn-blue my-3"
           @click="loadForm()"
-      >Create Task in Modal with Alphine.js + HTMX
+      >Create Task in Modal with Alpine.js + HTMX
       </button>
       <div class="absolute top-0 left-0 flex justify-center w-full h-full bg-black bg-opacity-30" x-show="open">
         <div class="relative h-auto w-full max-w-3xl mx-auto mt-10">

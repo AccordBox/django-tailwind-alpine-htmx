@@ -1,2 +1,2 @@
-Demo: [https://django-tailwind-alphine-htmx.herokuapp.com/](https://django-tailwind-alphine-htmx.herokuapp.com/)
+Demo: [https://django-tailwind-alpine-htmx.herokuapp.com/](https://django-tailwind-alpine-htmx.herokuapp.com/)
 

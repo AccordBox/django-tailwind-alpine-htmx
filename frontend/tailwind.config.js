@@ -21,13 +21,11 @@ if (pySitePackages){
   ];
 }
 
-const purgePaths = [...projectPaths, ...pyPackagesPaths];
-console.log(`tailwindcss purge by scanning ${purgePaths}`);
+const contentPaths = [...projectPaths, ...pyPackagesPaths];
+console.log(`tailwindcss will scan ${contentPaths}`);
 
 module.exports = {
-  mode: 'jit',
-  purge: purgePaths,
-  darkMode: false, // or 'media' or 'class'
+  content: contentPaths,
   theme: {
     extend: {},
   },

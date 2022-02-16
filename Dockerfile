@@ -60,7 +60,7 @@ ENV PYTHONUNBUFFERED=1 \
 EXPOSE 8000
 
 # Install assets
-RUN SECRET_KEY=none django-admin collectstatic -v 2 --noinput --clear
+RUN SECRET_KEY=none DJANGO_DEBUG=0 django-admin collectstatic -v 2 --noinput --clear
 
 # Run application
 CMD gunicorn django_tailwind_app.wsgi:application
